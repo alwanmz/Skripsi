@@ -1,6 +1,7 @@
 import aiml
 import re
 import string
+import spacy
 from collections import Counter
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
@@ -8,6 +9,15 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 # membuat stemmer
 factory = StemmerFactory()
 stemmer = factory.create_stemmer()
+
+nlp = spacy.load("xx_ent_wiki_sm")
+
+def ner(text):
+    doc = nlp(text)
+    entities = []
+    for ent in doc.ents:
+        entities.append((ent.text, ent.label_))
+    return entities
 
 # membuat kernal dan memuat file aiml
 kernel = aiml.Kernel()
@@ -63,6 +73,14 @@ def edits1(word):
 def edits2(word):
     "All edits that are two edits away from `word`."
     return (e2 for e1 in edits1(word) for e2 in known(edits1(e1)))
+
+def update_knowledge(text):
+    entities = ner(text)
+    for entity in entities:
+        pattern = entity[0] + ' ' + entity[1]
+        template = 'Tell me more about ' + entity[0] + '.'
+        category = '<category><pattern>{}</pattern><template>{}</template></category>'.format(pattern, template)
+        kernel.learn(category)
 
 # function untuk pre-processing
 def preprocess(text):

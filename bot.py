@@ -3,6 +3,7 @@ import aiml
 import re
 import random
 import string
+import spacy
 from collections import Counter
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
@@ -10,6 +11,15 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 # membuat stemmer
 factory = StemmerFactory()
 stemmer = factory.create_stemmer()
+
+nlp = spacy.load("xx_ent_wiki_sm")
+
+def ner(text):
+    doc = nlp(text)
+    entities = []
+    for ent in doc.ents:
+        entities.append((ent.text, ent.label_))
+    return entities
 
 # membuat kernal dan memuat file aiml
 kernel = aiml.Kernel()
@@ -63,6 +73,14 @@ def edits2(word):
     "All edits that are two edits away from `word`."
     return (e2 for e1 in edits1(word) for e2 in known(edits1(e1)))
 
+def update_knowledge(text):
+    entities = ner(text)
+    for entity in entities:
+        pattern = entity[0] + ' ' + entity[1]
+        template = 'Tell me more about ' + entity[0] + '.'
+        category = '<category><pattern>{}</pattern><template>{}</template></category>'.format(pattern, template)
+        kernel.learn(category)
+
 # function untuk pre-processing
 def preprocess(text):
     try:
@@ -93,8 +111,16 @@ def preprocess(text):
             stopwords = file.read().splitlines()
         filtered_words = [word for word in stemmed_words if word not in stopwords]
 
+        print("Proses Case Folding : ", text)
+        print("Proses Tokenizing : ", words)
+        print("Proses Spelling Correction : ", corrected_words)
+        print("Proses Stemming : ", stemmed_words)
+        print("Proses Filtering Stopwords : ", filtered_words)
+
         # join words back to sentence
         preprocessed_text = ' '.join(filtered_words)
+
+        print("Pattern : ", preprocessed_text)
 
         return preprocessed_text
     except FileNotFoundError as e:
@@ -105,6 +131,7 @@ def preprocess(text):
         # jika terjadi kesalahan atribut, tampilkan pesan error yang lebih jelas
         print("Error: AttributeError -", e)
         return text
+    
 
 app = Flask(__name__)
 
@@ -122,6 +149,7 @@ GENERATE_RESPONSE = ['Maaf, saya tidak mengerti pertanyaan Anda.',
 def process():
     data = request.get_json()
     user_input = data.get("user_input")
+    print("Inputan user : ", user_input)
     if not user_input:
         return jsonify({"response": "Tolong masukkan input yang valid."}), 400
     try:

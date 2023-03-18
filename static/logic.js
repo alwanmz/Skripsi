@@ -63,6 +63,21 @@ $(function() {
     $(".chat-logs").stop().animate({ scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);
     $("#chat-input").attr("disabled", true);
   }
+
+  $(document).ready(function() {
+    show_initial_messages();
+  });
+  
+  function show_initial_messages() {
+    setTimeout(function() {
+      generate_message("Halo, selamat datang di chatbot kami!", 'user');
+    }, 1000);
+  
+    setTimeout(function() {
+      var initial_msg = "Silakan bertanya tentang layanan kami. Contohnya: 'Bagaiamana template untuk proposal penelitian di Informatika UAD?'";
+      generate_message(initial_msg, 'user');
+    }, 1500);
+  }
   
   $(document).delegate(".chat-btn", "click", function() {
     var value = $(this).attr("chat-value");
