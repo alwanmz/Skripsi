@@ -132,6 +132,11 @@ def preprocess(text):
         print("Error: AttributeError -", e)
         return text
     
+    # function for chatting
+def chat(text):
+    preprocessed_text = preprocess(text)
+    response = kernel.respond(preprocessed_text)
+    return response
 
 app = Flask(__name__)
 

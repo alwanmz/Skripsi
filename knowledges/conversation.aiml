@@ -1,40 +1,60 @@
 <aiml version="2.0" encoding="UTF-8">
 
-<!-- Kategori Sapaan -->
+<!-- Kategori sapaan -->
   <category>
     <pattern>GREETINGS</pattern>
     <template>Halo! Saya akan membantu Anda dengan pertanyaan tentang skripsi dan metodologi penelitian di Informatika UAD. Silakan tanyakan apa yang ingin Anda ketahui.</template>
   </category>
+
   <category>
     <pattern>SELAMAT PAGI</pattern>
     <template>
       <srai>GREETINGS</srai>
     </template>
   </category>
+
   <category>
     <pattern>SELAMAT SIANG</pattern>
     <template>
       <srai>GREETINGS</srai>
     </template>
   </category>
+
   <category>
     <pattern>SELAMAT SORE</pattern>
     <template>
       <srai>GREETINGS</srai>
     </template>
   </category>
+
   <category>
     <pattern>SELAMAT MALAM</pattern>
     <template>
       <srai>GREETINGS</srai>
     </template>
   </category>
+
+  <category>
+    <pattern>HAI</pattern>
+    <template>
+      <srai>GREETINGS</srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>HALO</pattern>
+    <template>
+      <srai>GREETINGS</srai>
+    </template>
+  </category>
+
   <category>
     <pattern>HAI *</pattern>
     <template>
       <srai>GREETINGS</srai>
     </template>
   </category>
+
   <category>
     <pattern>HALO *</pattern>
     <template>
@@ -42,29 +62,33 @@
     </template>
   </category>
 
-<!-- Kategori Akhiri Percakapan -->
+<!-- Kategori akhiri percakapan -->
   <category>
     <pattern>GOODBYE</pattern>
     <template>Semoga berhasil dengan penelitiannya ;)</template>
   </category>
+
   <category>
     <pattern>SELAMAT TINGGAL</pattern>
     <template>
       <srai>GOODBYE</srai>
     </template>
   </category>
+
   <category>
     <pattern>SIP</pattern>
     <template>
       <srai>GOODBYE</srai>
     </template>
   </category>
+
   <category>
     <pattern>BYE</pattern>
     <template>
       <srai>GOODBYE</srai>
     </template>
   </category>
+
   <category>
     <pattern>OKAY</pattern>
     <template>
@@ -72,12 +96,20 @@
     </template>
   </category>
 
-
-<!-- Kategori Salam -->
+<!-- Kategori salam -->
   <category>
     <pattern>ASSALAMUALAIKUM *</pattern>
     <template>Waalaikumsalam, ada yang bisa saya bantu?</template>
   </category>
+
+<!-- Katgeori pengertian umum -->
+  <category>
+    <pattern> METODOLOGI TELITI </pattern>
+    <template> Metodologi Penelitian adalah suatu ilmu yang mempelajari cara-cara yang digunakan dalam penelitian. </template>
+  </category>
+  
+  
+
 
 <!-- Kategori untuk meminta informasi tentang topik skripsi -->
   <category>
@@ -85,6 +117,7 @@
     <template>Saya adalah chatbot dan tidak memiliki skripsi, tapi saya siap membantu menjawab pertanyaan Anda seputar skripsi</template>
   </category>
 
+<!-- Kategori untuk ucapan terima kasih -->
   <category>
     <pattern>TERIMA KASIH *</pattern>
     <template>Sama-sama, semoga berhasil dengan skripsinya ;)</template>
