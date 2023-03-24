@@ -71,12 +71,12 @@ $(function() {
   function show_initial_messages() {
     setTimeout(function() {
       generate_message("Halo, selamat datang di chatbot kami!", 'user');
-    }, 1000);
+    }, 2000);
   
     setTimeout(function() {
       var initial_msg = "Silakan bertanya tentang layanan kami. Contohnya: 'Bagaiamana template untuk proposal penelitian di Informatika UAD?'";
       generate_message(initial_msg, 'user');
-    }, 1500);
+    }, 2500);
   }
   
   $(document).delegate(".chat-btn", "click", function() {
