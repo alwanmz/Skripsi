@@ -98,7 +98,7 @@
 
 <!-- Kategori salam -->
   <category>
-    <pattern>ASSALAMUALAIKUM *</pattern>
+    <pattern>ASSALAMUALAIKUM </pattern>
     <template>Waalaikumsalam, ada yang bisa saya bantu?</template>
   </category>
 
@@ -107,7 +107,6 @@
     <pattern> METODOLOGI TELITI </pattern>
     <template> Metodologi Penelitian adalah suatu ilmu yang mempelajari cara-cara yang digunakan dalam penelitian. </template>
   </category>
-  
   
 <!-- Kategori untuk meminta informasi tentang topik skripsi -->
   <category>
